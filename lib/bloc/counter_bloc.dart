@@ -1,4 +1,4 @@
-import 'package:bloc_29092022/counter_event.dart';
+import 'package:bloc_29092022/bloc/counter_event.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'counter_state.dart';
 

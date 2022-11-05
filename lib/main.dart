@@ -1,7 +1,8 @@
-import 'package:bloc_29092022/demo_counter.dart';
+import 'package:bloc_29092022/bloc/demo_counter.dart';
+import 'package:bloc_29092022/handle_bloc/demo_counter1.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'app_bloc_observer.dart';
+import 'bloc/app_bloc_observer.dart';
 
 void main() {
   Bloc.observer = AppBlocObserver();
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DemoCounterPage()
+      home: DemoCounterPage1()
     );
   }
 }
