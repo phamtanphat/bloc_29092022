@@ -1,7 +1,8 @@
-abstract class CounterStateBase {}
+abstract class CounterStateBase {
+  int value;
+  CounterStateBase({required this.value});
+}
 
 class NewValueCounterState extends CounterStateBase {
-  int value;
-
-  NewValueCounterState({required this.value});
+  NewValueCounterState({required super.value});
 }
