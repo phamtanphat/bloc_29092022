@@ -1,4 +1,8 @@
+import 'package:bloc_29092022/counter_bloc.dart';
+import 'package:bloc_29092022/counter_event.dart';
+import 'package:bloc_29092022/counter_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 class DemoCounterPage extends StatefulWidget {
 
   @override
@@ -6,6 +10,14 @@ class DemoCounterPage extends StatefulWidget {
 }
 
 class _DemoCounterPageState extends State<DemoCounterPage> {
+  late CounterBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = CounterBloc();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,13 +30,18 @@ class _DemoCounterPageState extends State<DemoCounterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Count"),
+            BlocBuilder<CounterBloc, CounterStateBase>(
+                bloc: bloc,
+                builder: (context, state) {
+                  return Text("Count: ${state.value}");
+                },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                     onPressed: () {
-
+                      bloc.add(InCreaseEvent(value: 1));
                     },
                     child: Text("+")
                 ),

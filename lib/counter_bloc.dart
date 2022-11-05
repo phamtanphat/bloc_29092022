@@ -7,7 +7,7 @@ class CounterBloc extends Bloc<CounterBaseEvent, CounterStateBase> {
   CounterBloc() : super(NewValueCounterState(value: 0)) {
     on<InCreaseEvent>((event, emit) {
       int value = event.value;
-      int result = value + state.value;
+      int result = value + (state as NewValueCounterState).value;
       emit(NewValueCounterState(value: result));
     });
   }
