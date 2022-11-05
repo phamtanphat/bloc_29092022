@@ -1,3 +1,5 @@
+import 'package:bloc_29092022/handle_bloc/counter1_bloc.dart';
+import 'package:bloc_29092022/handle_bloc/counter1_event.dart';
 import 'package:flutter/material.dart';
 class DemoCounterPage1 extends StatefulWidget {
 
@@ -6,6 +8,14 @@ class DemoCounterPage1 extends StatefulWidget {
 }
 
 class _DemoCounterPageState1 extends State<DemoCounterPage1> {
+
+  late Counter1Bloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    bloc = Counter1Bloc();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +29,26 @@ class _DemoCounterPageState1 extends State<DemoCounterPage1> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Count: "),
+            StreamBuilder<int>(
+                stream: bloc.counter1.stream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(child: Text(snapshot.error.toString()),);
+                  }
+                  switch(snapshot.connectionState) {
+                    case ConnectionState.active:
+                      return Text("Count: ${snapshot.data.toString()}");
+                    default:
+                      return Container();
+                  }
+                }
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                     onPressed: () {
-
+                        bloc.eventSink.add(InCreaseEvent(value: 1));
                     },
                     child: Text("+")
                 ),
